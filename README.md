@@ -6,7 +6,9 @@ By looking at the error gradient w.r.t. each sample, and filtering out the zeros
 It works roughly how you'd expect after that explanation. You get all the gradients, count how many samples have non-zero gradients for each feature, sum up the gradients, and divide by that number for all of the features (instead of by the total number of samples, like a true mean).
 
 ## RESULTS
-I ran a few simple experiments, training a 4-layer NN using ADAM, Gradient Descent, Momentum, and my optimization procedure. My optimizer works better per-sample than SGD, a little better than momentum, and worse than ADAM. This is promising, because it would be easy to add momentum to my optimizer, to make it even better. Here are results, after different numbers of  32-sample minibatches.
+I ran a few simple experiments, training a 4-layer NN using ADAM, Gradient Descent, Momentum, and my optimization procedure. My optimizer works better per-sample than SGD, a little better than momentum, and worse than ADAM. This is promising, because it would be easy to add momentum to my optimizer, to make it even better. Here are results, after different numbers of 32-sample minibatches.
+
+It's clearly not a rigorous test, but I ran those experiments a lot of times, and the results are generally the same.
 ___
 
 
