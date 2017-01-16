@@ -57,6 +57,13 @@ if __name__ == '__main__':
   sess.run(init)
 
   for i in range(NUM_MINIBATCHES):
+    if i % 100 == 0:
+      acc, _ce = sess.run([model_dict['ACCURACY_TEST'], model_dict['CE_TEST']], feed_dict={
+        model_dict['INPUT_PH_TEST']: mnist.test.images,
+        model_dict['OUTPUT_PH_TEST']: mnist.test.labels
+      })
+      print('TYPE: {}      BATCH: {}      ACCURACY: {}     CE: {}'.format(OPT_TYPE, i, acc, _ce))
+    
     batch_xs, batch_ys = mnist.train.next_batch(BATCH_SIZE)
     feed_dict={
       model_dict['INPUT_PH'] : batch_xs,
@@ -65,12 +72,6 @@ if __name__ == '__main__':
 
     _, _cross_entropy = sess.run([updates, model_dict['CE_REDUCED']], feed_dict=feed_dict)
     # correct_prediction = tf.equal(tf.argmax(model_dict['OUTPUT_PH_TEST'],1), tf.argmax(model_dict['OUTPUT_CALC_TEST'],1))
-    if i % 10 == 0:
-      acc, _ce = sess.run([model_dict['ACCURACY_TEST'], model_dict['CE_TEST']], feed_dict={
-        model_dict['INPUT_PH_TEST']: mnist.test.images,
-        model_dict['OUTPUT_PH_TEST']: mnist.test.labels
-      })
-      print('TYPE: {}      BATCH: {}      ACCURACY: {}     CE: {}'.format(OPT_TYPE, i, acc, _ce))
 
 
 
