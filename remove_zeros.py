@@ -6,10 +6,10 @@ LR=0.05
 ADAM_LR=1e-3
 BATCH_SIZE=32
 NUM_MINIBATCHES=10000
-OPT_TYPE = 'MINE'
+# OPT_TYPE = 'MINE'
 # OPT_TYPE = 'GRAD_DESC'
 # OPT_TYPE = 'MOMENTUM'
-# OPT_TYPE = 'ADAM'
+OPT_TYPE = 'ADAM'
 
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
@@ -57,13 +57,13 @@ if __name__ == '__main__':
   sess.run(init)
 
   for i in range(NUM_MINIBATCHES):
-    if i % 100 == 0:
+    if i % 500 == 0:
       acc, _ce = sess.run([model_dict['ACCURACY_TEST'], model_dict['CE_TEST']], feed_dict={
         model_dict['INPUT_PH_TEST']: mnist.test.images,
         model_dict['OUTPUT_PH_TEST']: mnist.test.labels
       })
       print('TYPE: {}      BATCH: {}      ACCURACY: {}     CE: {}'.format(OPT_TYPE, i, acc, _ce))
-    
+
     batch_xs, batch_ys = mnist.train.next_batch(BATCH_SIZE)
     feed_dict={
       model_dict['INPUT_PH'] : batch_xs,
