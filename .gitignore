@@ -1,0 +1,4 @@
+remove_zeros_with_momentum.py
+remove_zeros_most_consistent_direction.py
+remove_zeros_OLD.py
+MNIST_DATA/*
